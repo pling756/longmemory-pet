@@ -1,0 +1,15 @@
+.venv/
+.deps/
+.wheels/
+.shots/
+.tmp/
+data/
+.idea/
+build/
+dist/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.log

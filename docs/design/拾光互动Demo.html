@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>拾光 · 互动桌宠 Demo</title>
+<style>
+:root{
+  --color-background-primary:#1f1f1f;--color-background-secondary:#2a2a2a;--color-background-tertiary:#161616;
+  --color-text-primary:#f1efe8;--color-text-secondary:#b4b2a9;--color-text-tertiary:#888780;
+  --color-border-tertiary:rgba(255,255,255,.15);--color-border-secondary:rgba(255,255,255,.3);--color-border-primary:rgba(255,255,255,.45);
+  --font-sans:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+  --border-radius-md:8px;--border-radius-lg:12px;
+}
+body{margin:0;background:var(--color-background-primary);color:var(--color-text-primary);font-family:var(--font-sans);padding:24px 16px}
+</style>
+</head>
+<body>
+<style>
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#stage{perspective:700px}
+#petWrap{transition:transform .15s ease-out;will-change:transform;cursor:pointer}
+#btns button{background:var(--color-background-secondary);color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:7px 14px;font-size:13px;cursor:pointer;font-family:var(--font-sans)}
+#btns button:hover{border-color:var(--color-border-primary)}
+#bubble{transition:opacity .3s}
+#petG,#orbBob,#tailG,#eyesOpen,#armL{transform-box:fill-box}
+#tailG{transform-origin:0% 50%}
+#armL{transform-origin:100% 50%}
+@media (prefers-reduced-motion: no-preference){
+#petG{animation:breathe 2.8s ease-in-out infinite}
+#orbBob{animation:bob 3.2s ease-in-out infinite}
+#tailG{animation:wag 2.4s ease-in-out infinite}
+#eyesOpen{animation:blink 4.5s infinite;transform-origin:center}
+#armL.waving{animation:wave 1.2s ease-in-out}
+.pop{animation:pop .5s ease-out}
+#zz1,#zz2{animation:zz 2.4s ease-in-out infinite}
+#zz2{animation-delay:1.2s}
+}
+@keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.03)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes wag{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(9deg)}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes wave{0%,100%{transform:rotate(0)}30%{transform:rotate(-30deg)}70%{transform:rotate(10deg)}}
+@keyframes pop{0%{transform:scale(1)}35%{transform:scale(1.1)}65%{transform:scale(.97)}100%{transform:scale(1)}}
+@keyframes zz{0%{opacity:0;transform:translateY(8px)}40%{opacity:1}100%{opacity:0;transform:translateY(-12px)}}
+</style>
+<div style="max-width:520px;margin:0 auto">
+  <h2 class="sr-only">拾光互动演示：伪3D、动作与表情切换</h2>
+  <div id="stage" style="position:relative;padding-top:64px">
+    <div id="bubble" style="position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-lg);padding:8px 14px;font-size:13px;color:var(--color-text-primary);max-width:88%;text-align:center;line-height:1.5">嗨～我是拾光！移动鼠标，我会看着你哦</div>
+    <div id="petWrap">
+      <svg viewBox="0 0 400 470" width="100%" role="img" aria-label="拾光立体互动立绘">
+        <title>拾光（立体互动版）</title>
+        <defs><clipPath id="bc"><ellipse cx="200" cy="300" rx="104" ry="98"/></clipPath></defs>
+        <ellipse cx="200" cy="440" rx="92" ry="13" fill="#5F5E5A" opacity="0.35"/>
+        <path transform="translate(52,120)" d="M0 -11 L2.6 -2.6 L11 0 L2.6 2.6 L0 11 L-2.6 2.6 L-11 0 L-2.6 -2.6 Z" fill="#BA7517" opacity="0.8"/>
+        <path transform="translate(352,150) scale(0.8)" d="M0 -11 L2.6 -2.6 L11 0 L2.6 2.6 L0 11 L-2.6 2.6 L-11 0 L-2.6 -2.6 Z" fill="#ED93B1" opacity="0.8"/>
+        <path transform="translate(60,300) scale(0.7)" d="M0 -11 L2.6 -2.6 L11 0 L2.6 2.6 L0 11 L-2.6 2.6 L-11 0 L-2.6 -2.6 Z" fill="#85B7EB" opacity="0.7"/>
+        <g id="petG">
+          <g id="tailG"><path d="M295 258 q52 -12 76 12 q-22 -2 -38 10 q19 8 35 25 q-38 -9 -73 -13 z" fill="#5DCAA5" stroke="#26215C" stroke-width="5" stroke-linejoin="round"/></g>
+          <ellipse cx="162" cy="392" rx="20" ry="13" fill="#AFA9EC" stroke="#26215C" stroke-width="5"/>
+          <ellipse cx="238" cy="392" rx="20" ry="13" fill="#AFA9EC" stroke="#26215C" stroke-width="5"/>
+          <g id="armL"><ellipse cx="88" cy="272" rx="14" ry="19" fill="#AFA9EC" stroke="#26215C" stroke-width="5"/></g>
+          <ellipse cx="312" cy="272" rx="14" ry="19" fill="#AFA9EC" stroke="#26215C" stroke-width="5"/>
+          <g clip-path="url(#bc)">
+            <ellipse cx="200" cy="300" rx="104" ry="98" fill="#AFA9EC"/>
+            <ellipse cx="168" cy="262" rx="76" ry="64" fill="#C9C4F5"/>
+            <ellipse cx="246" cy="344" rx="84" ry="62" fill="#8B82D6"/>
+            <ellipse cx="200" cy="336" rx="60" ry="62" fill="#EEEDFE"/>
+          </g>
+          <ellipse cx="200" cy="300" rx="104" ry="98" fill="none" stroke="#26215C" stroke-width="6"/>
+          <path d="M200 204 q-3 -8 0 -12" fill="none" stroke="#26215C" stroke-width="4" stroke-linecap="round"/>
+          <path d="M200 202 q-4 -10 0 -17 q4 7 3 17 z" fill="#5DCAA5" stroke="#26215C" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M200 204 q-12 -5 -19 -15 q14 2 19 15 z" fill="#5DCAA5" stroke="#26215C" stroke-width="3" stroke-linejoin="round"/>
+          <g id="orbMove"><g id="orbBob">
+            <circle cx="200" cy="96" r="34" fill="#378ADD" stroke="#26215C" stroke-width="5"/>
+            <circle cx="188" cy="86" r="12" fill="#85B7EB" opacity="0.9"/>
+            <circle cx="210" cy="84" r="4" fill="#EEEDFE"/>
+            <circle cx="190" cy="92" r="5" fill="#B5D4F4"/>
+            <circle cx="210" cy="106" r="4" fill="#BA7517"/>
+            <circle cx="196" cy="110" r="3" fill="#ED93B1"/>
+            <circle id="md1" cx="212" cy="92" r="3" fill="#EEEDFE" style="display:none"/>
+            <circle id="md2" cx="184" cy="102" r="3" fill="#F4C0D1" style="display:none"/>
+            <circle id="md3" cx="204" cy="118" r="3" fill="#FAC775" style="display:none"/>
+            <circle id="md4" cx="192" cy="74" r="3" fill="#9FE1CB" style="display:none"/>
+            <circle id="md5" cx="215" cy="104" r="3" fill="#CECBF6" style="display:none"/>
+          </g></g>
+          <g id="faceHappy">
+            <g id="eyesMove"><g id="eyesOpen">
+              <ellipse cx="163" cy="292" rx="19" ry="24" fill="#26215C"/>
+              <ellipse cx="237" cy="292" rx="19" ry="24" fill="#26215C"/>
+              <circle cx="170" cy="284" r="6" fill="#FFFFFF"/>
+              <circle cx="157" cy="299" r="3" fill="#FFFFFF"/>
+              <circle cx="230" cy="284" r="6" fill="#FFFFFF"/>
+              <circle cx="243" cy="299" r="3" fill="#FFFFFF"/>
+            </g></g>
+            <ellipse cx="128" cy="330" rx="16" ry="9" fill="#F0997B" opacity="0.85"/>
+            <ellipse cx="272" cy="330" rx="16" ry="9" fill="#F0997B" opacity="0.85"/>
+            <path d="M186 330 q14 12 28 0" fill="none" stroke="#26215C" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <g id="faceExcited" style="display:none">
+            <ellipse cx="126" cy="332" rx="18" ry="11" fill="#F0997B" opacity="0.95"/>
+            <ellipse cx="274" cy="332" rx="18" ry="11" fill="#F0997B" opacity="0.95"/>
+            <ellipse cx="163" cy="290" rx="21" ry="27" fill="#26215C"/>
+            <ellipse cx="237" cy="290" rx="21" ry="27" fill="#26215C"/>
+            <circle cx="171" cy="280" r="8" fill="#FFFFFF"/>
+            <circle cx="155" cy="300" r="4" fill="#FFFFFF"/>
+            <circle cx="229" cy="280" r="8" fill="#FFFFFF"/>
+            <circle cx="245" cy="300" r="4" fill="#FFFFFF"/>
+            <path d="M180 324 q20 28 40 0 q-20 14 -40 0 z" fill="#F0997B" stroke="#26215C" stroke-width="4" stroke-linejoin="round"/>
+            <path transform="translate(318,190) scale(1.3)" d="M0 -11 L2.6 -2.6 L11 0 L2.6 2.6 L0 11 L-2.6 2.6 L-11 0 L-2.6 -2.6 Z" fill="#BA7517"/>
+          </g>
+          <g id="faceSleepy" style="display:none">
+            <path d="M146 292 q17 15 34 0" fill="none" stroke="#26215C" stroke-width="5" stroke-linecap="round"/>
+            <path d="M220 292 q17 15 34 0" fill="none" stroke="#26215C" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="200" cy="334" rx="6" ry="8" fill="#F0997B" stroke="#26215C" stroke-width="3"/>
+            <ellipse cx="128" cy="332" rx="14" ry="8" fill="#F0997B" opacity="0.5"/>
+            <ellipse cx="272" cy="332" rx="14" ry="8" fill="#F0997B" opacity="0.5"/>
+            <text id="zz1" x="296" y="210" font-size="26" font-weight="500" fill="#85B7EB" font-family="sans-serif">z</text>
+            <text id="zz2" x="320" y="186" font-size="20" font-weight="500" fill="#85B7EB" font-family="sans-serif">z</text>
+          </g>
+          <g id="faceSurprised" style="display:none">
+            <path d="M146 262 q17 -8 34 0" fill="none" stroke="#26215C" stroke-width="4" stroke-linecap="round"/>
+            <path d="M220 262 q17 -8 34 0" fill="none" stroke="#26215C" stroke-width="4" stroke-linecap="round"/>
+            <ellipse cx="163" cy="290" rx="22" ry="26" fill="#26215C"/>
+            <ellipse cx="237" cy="290" rx="22" ry="26" fill="#26215C"/>
+            <circle cx="171" cy="281" r="7" fill="#FFFFFF"/>
+            <circle cx="229" cy="281" r="7" fill="#FFFFFF"/>
+            <ellipse cx="200" cy="338" rx="11" ry="13" fill="#26215C"/>
+            <text x="316" y="212" font-size="34" font-weight="500" fill="#D85A30" font-family="sans-serif">!</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div id="btns" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+    <button data-act="pet">摸摸头</button>
+    <button data-act="feed">喂记忆果</button>
+    <button data-act="hello">打招呼</button>
+    <button data-act="poke">戳一戳</button>
+    <button data-act="sleep">睡一觉</button>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--color-text-tertiary);margin:10px 0 0">移动鼠标：拾光的视线会跟着你，身体像立体摆件一样轻轻转动</p>
+</div>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var faces={happy:'faceHappy',excited:'faceExcited',sleepy:'faceSleepy',surprised:'faceSurprised'};
+var mem=0,sleeping=false;
+function setFace(n){for(var k in faces){$(faces[k]).style.display=(k===n)?'':'none'}sleeping=(n==='sleepy')}
+var sayT=null;
+function say(t){var b=$('bubble');b.textContent=t;b.style.opacity='1';if(sayT)clearTimeout(sayT);sayT=setTimeout(function(){b.style.opacity='0.45'},5000)}
+function pop(){var w=$('petWrap');w.classList.remove('pop');void w.offsetWidth;w.classList.add('pop')}
+function wave(){var a=$('armL');a.classList.add('waving');setTimeout(function(){a.classList.remove('waving')},1300)}
+var lines={
+ pet:['好舒服～你的手我记住啦！','摸头检查完毕，今天也是元气满满！'],
+ hello:['嗨～我是拾光！今天也想听听你的事～','你回来啦！我一直在这等你哦'],
+ poke:['哇！吓我一跳…不过我记得你最爱逗我玩','嘿嘿，被你发现了'],
+ sleep:['那我要睡啦…你的事我都好好记着呢 zzZ','晚安…梦里也会记得你哦 zzZ']
+};
+function act(a){
+ if(a!=='sleep'&&sleeping){setFace('happy');say('哈欠…我醒啦！')}
+ if(a==='feed'){mem=Math.min(mem+1,5);var d=$('md'+mem);if(d)d.style.display='';setFace('excited');pop();say('谢谢！我又记住了一件小事（记忆珠 ×'+(3+mem)+'）');return}
+ if(a==='sleep'){setFace('sleepy');say(lines.sleep[Math.floor(Math.random()*lines.sleep.length)]);return}
+ if(a==='pet'){setFace('happy');pop()}
+ if(a==='hello'){setFace('excited');wave()}
+ if(a==='poke'){setFace('surprised');pop()}
+ var arr=lines[a];if(arr)say(arr[Math.floor(Math.random()*arr.length)]);
+}
+document.querySelectorAll('#btns button').forEach(function(b){b.addEventListener('click',function(){act(b.getAttribute('data-act'))})});
+$('petWrap').addEventListener('click',function(){act('poke')});
+var stage=$('stage'),wrap=$('petWrap'),eyes=$('eyesMove'),orb=$('orbMove');
+stage.addEventListener('mousemove',function(e){
+ var r=stage.getBoundingClientRect();
+ var dx=(e.clientX-r.left)/r.width-0.5,dy=(e.clientY-r.top)/r.height-0.5;
+ wrap.style.transform='rotateY('+(dx*10)+'deg) rotateX('+(-dy*8)+'deg)';
+ if(eyes)eyes.setAttribute('transform','translate('+(dx*8)+' '+(dy*5)+')');
+ if(orb)orb.setAttribute('transform','translate('+(dx*10)+' '+(dy*6)+')');
+});
+stage.addEventListener('mouseleave',function(){
+ wrap.style.transform='';
+ if(eyes)eyes.setAttribute('transform','');
+ if(orb)orb.setAttribute('transform','');
+});
+var idle=['我一直记得你说过的话哦～','你上次说想去看海，还在惦记吗？','记忆珠又亮了一点，因为我记住了你','累了就歇会儿，我陪你'];
+setInterval(function(){if(!sleeping&&Math.random()<0.5)say(idle[Math.floor(Math.random()*idle.length)])},14000);
+})();
+</script>
+</body>
+</html>
